@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="title">
+        <h1>PRESIDENTE APP</h1>
+    </div>
+
+    <div class="form">
+        <form action="" class="lobby" (ngSubmit)="joinRoom(formGame)" #formGame="ngForm">
+            <div class="name">
+                <label for="name" id="name" class="form">Introduzca su nombre:</label>
+                <input type="text" ngModel name="nombre">
+            </div>
+            <div class="sala">
+                <label for="roomId" id="room" class="form">Introduzca el numero de la sala:</label>
+                <input type="text" ngModel name="roomId">
+            </div>
+            <div class="submit">
+                <button type="submit">Entrar a la sala</button>
+            </div>
+        </form>
+    </div>
+
+</div>

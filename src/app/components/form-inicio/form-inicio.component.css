@@ -1,0 +1,40 @@
+body{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100%;
+    background-color: rgb(122, 31, 31);
+}
+
+div.container{
+    /* width: 100vw; */
+    height: 50em;
+    
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.name, div.sala{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+label{
+    margin-right: 10px;
+}
+
+input{
+    align-items: flex-end;
+}
