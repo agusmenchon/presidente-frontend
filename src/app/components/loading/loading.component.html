@@ -1,1 +1,24 @@
-<p>loading works!</p>
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <strong role="status">Loading...</strong>
+</div>
+
+<div class="list-players">
+    <div>
+        <ul>
+                <li *ngFor="let jugador of jugadores">
+                    {{jugador.nombre}}
+                </li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="idUnico==0">
+    <button class="btn btn-primary">Empezar juego</button>
+</div>
+
+<div>
+    <strong>ID DE LA SALA: {{ idSala }}</strong>
+</div>

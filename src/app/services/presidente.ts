@@ -10,8 +10,10 @@ import { HttpClient } from '@angular/common/http';
 export class presidenteService {
 
   private stompClient: any;
-  private mensaje:turnoDTO | undefined;
-  private idUnique:number | undefined;
+  private mensaje!: turnoDTO;
+  private _idSala!:string;
+  private _idUnique:number | undefined;
+  private _jugadores:Jugador [] = [];
 
   constructor( private http: HttpClient) { 
     this.initConnectionSocket();
@@ -25,33 +27,47 @@ export class presidenteService {
     });
   }
 
+  // GETTERS
+
+  get jugadores():Jugador[]{
+    return [...this._jugadores];
+  }
+  
+  get idJugador():number | undefined{
+    return this._idUnique;
+  }
+
+  get idSala():string{
+    return this._idSala;
+  }
+
+  // METHODS
+
   suscribe(idSala:string){
     this.stompClient.subscribe(`/topic/game/`+idSala, (messages:turnoDTO) => {
       // mensajes que llegan como turno DTO del servidor
       this.mensaje = JSON.parse(messages.body);
       console.log(this.mensaje);
-      // this.mensaje = messageContent;
-      // console.log(messageContent);
 
-      // const jugadores:Jugador[] = [];
-      // for(let jugador of messageContent.jugadores){
-      //   jugadores.push(jugador);
-      // }
+      this._jugadores = this.mensaje?.jugadores;
     })
   }
   
-  // jugarCartas(roomId: string, turno:turnoDTO) {
+    // jugarCartas(roomId: string, turno:turnoDTO) {
     //   this.stompClient.send(`/app/play/${roomId}`, JSON.stringify(turno));
     // }
     
   joinRoom(connectDTO:any) {
+      this._idSala = connectDTO.idSala;
       this.suscribe(connectDTO.idSala);
       this.stompClient.send("/app/join", {}, JSON.stringify(connectDTO));
       this.getId(connectDTO).subscribe( resp => {
-        this.idUnique = resp;
-        console.log(this.idUnique);
+        this._idUnique = resp;
+        console.log("index de jugador" + this._idUnique);
       })
   }
+
+  // RECUPERAR ID DE JUGADOR
 
   getId(connectDTO:any){
     const url:string = 'http://localhost:3000/id/user';

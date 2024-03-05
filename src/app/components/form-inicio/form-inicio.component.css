@@ -38,3 +38,7 @@ label{
 input{
     align-items: flex-end;
 }
+
+.submit{
+    align-self: center;
+}
