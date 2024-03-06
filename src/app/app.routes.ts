@@ -1,18 +1,22 @@
 import { Routes } from '@angular/router';
-import { FormInicioComponent } from './components/form-inicio/form-inicio.component';
-import { PresidenteGameComponent } from './components/presidente-game/presidente-game.component';
-import { LoadingComponent } from './components/loading/loading.component';
+import { authGuard } from './login/guards/auth.guard';
+// import { FormInicioComponent } from './login/form-inicio/form-inicio.component';
+// import { PresidenteGameComponent } from './game/presidente-game/presidente-game.component';
+// import { LoadingComponent } from './game/loading/loading.component';
 
 export const routes: Routes = [
     {
-        path: 'home', component: FormInicioComponent,
+        path: 'home',
+        loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
     },
     {
-        path: 'game/:roomId', component: PresidenteGameComponent,
+        path: 'game',
+        loadChildren: () => import('./game/game.module').then(m => m.GameModule),
+        canActivate: [ authGuard ]
     },
-    {
-        path: `loading/:idSala`, component: LoadingComponent
-    },
+    // {
+    //     path: `loading/:idSala`, component: LoadingComponent
+    // },
     {
         path: '**', redirectTo: 'home'
     }

@@ -16,9 +16,9 @@
 </div>
 
 <div *ngIf="idUnico==0">
-    <button class="btn btn-primary">Empezar juego</button>
+    <button class="btn btn-primary" (click)="playGame(sala!)">Empezar juego</button>
 </div>
 
 <div>
-    <strong>ID DE LA SALA: {{ idSala }}</strong>
+    <strong>ID DE LA SALA: {{ sala }}</strong>
 </div>
